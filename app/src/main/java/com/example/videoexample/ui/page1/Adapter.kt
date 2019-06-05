@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.videoexample.R
+import com.example.videoexample.ext.SampleData
+import com.example.videoexample.thirdparty.GlideApp
+import com.example.videoexample.thirdparty.loadImage
 
 class VideoAdapter(val context: Context, val data: ArrayList<VideoItem>) :
     RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
@@ -33,6 +36,11 @@ class VideoAdapter(val context: Context, val data: ArrayList<VideoItem>) :
         } else {
             holder.lb_playing.visibility = View.GONE
         }
+//        holder.icon.loadImage(SampleData.VIDEO_1)
+        GlideApp.with(context)
+            .load(SampleData.VIDEO_1)
+            .thumbnail(0.2f)
+            .into(holder.icon)
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
