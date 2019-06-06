@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.videoexample.Constant
 import com.example.videoexample.R
 import com.google.android.exoplayer2.ExoPlayerFactory
-import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -18,7 +18,7 @@ import com.google.android.exoplayer2.util.Util
 class VideoFragment : Fragment() {
 
     var playerView: PlayerView? = null
-
+    lateinit var player: SimpleExoPlayer
     val videoUrl: String
         get() = arguments?.getString(Constant.Args.VIDEO_URL) ?: ""
 
@@ -35,10 +35,9 @@ class VideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val player = ExoPlayerFactory.newSimpleInstance(context)
+        player = ExoPlayerFactory.newSimpleInstance(context)
         player.playWhenReady = true
-
-        playerView?.player = player as Player
+        playerView?.player = player
         val dataSourceFactory = DefaultDataSourceFactory(
             context,
             Util.getUserAgent(context, "example video")
@@ -47,5 +46,10 @@ class VideoFragment : Fragment() {
             .createMediaSource(Uri.parse(videoUrl))
         // Prepare the player with the source.
         player.prepare(videoSource)
+    }
+
+    override fun onDestroy() {
+        player.release()
+        super.onDestroy()
     }
 }

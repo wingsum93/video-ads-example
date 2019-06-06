@@ -1,6 +1,5 @@
 package com.example.videoexample.ext
 
-import android.provider.MediaStore
 import com.example.videoexample.ui.page1.VideoItem
 
 object SampleData {
@@ -8,6 +7,9 @@ object SampleData {
 
     fun getVideoList(): ArrayList<VideoItem> {
         return arrayListOf(
+            buildVideoItem(url = SampleData.VIDEO_1),
+            buildVideoItem(url = SampleData.VIDEO_1),
+            buildVideoItem(url = SampleData.VIDEO_1),
             buildVideoItem(url = SampleData.VIDEO_1),
             buildVideoItem(url = SampleData.VIDEO_1),
             buildVideoItem(url = SampleData.VIDEO_1),
