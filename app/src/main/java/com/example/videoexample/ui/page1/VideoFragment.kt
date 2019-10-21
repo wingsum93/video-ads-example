@@ -10,8 +10,12 @@ import com.example.videoexample.Constant
 import com.example.videoexample.R
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.hls.HlsDataSourceFactory
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
@@ -39,13 +43,36 @@ class VideoFragment : Fragment() {
         player.playWhenReady = true
 
         playerView?.player = player as Player
+
+        val videoSource = createVideoDataSource()
+        // Prepare the player with the source.
+        player.prepare(videoSource)
+    }
+
+
+    private fun createVideoDataSource(): MediaSource {
         val dataSourceFactory = DefaultDataSourceFactory(
             context,
             Util.getUserAgent(context, "example video")
         )
-        val videoSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+
+
+        if (videoUrl.isHls()){
+
+            HlsMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(Uri.parse(videoUrl))
+        }
+        if(videoUrl.isMp4()) {
+            return ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(Uri.parse(videoUrl))
+
+        }
+        return ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(Uri.parse(videoUrl))
-        // Prepare the player with the source.
-        player.prepare(videoSource)
+
     }
+
+    private fun String.isMp4(): Boolean = this.contains(".mp4",true)
+
+    private fun String.isHls():Boolean = this.contains(".m3u8",true)
 }
