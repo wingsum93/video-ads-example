@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_1.setOnClickListener {
             startActivity<DefaultVideoActivity>(
-                Constant.Args.VIDEO_URL to SampleData.VIDEO_1
+                Constant.Args.VIDEO_URL to SampleData.VIDEO_2
             )
         }
 

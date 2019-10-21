@@ -59,7 +59,7 @@ class VideoFragment : Fragment() {
 
         if (videoUrl.isHls()){
 
-            HlsMediaSource.Factory(dataSourceFactory)
+            return HlsMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(Uri.parse(videoUrl))
         }
         if(videoUrl.isMp4()) {
