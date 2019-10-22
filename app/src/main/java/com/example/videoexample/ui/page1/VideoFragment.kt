@@ -11,6 +11,7 @@ import com.example.videoexample.R
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.source.hls.HlsDataSourceFactory
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
@@ -22,7 +23,7 @@ import com.google.android.exoplayer2.util.Util
 class VideoFragment : Fragment() {
 
     var playerView: PlayerView? = null
-
+    lateinit var player: SimpleExoPlayer
     val videoUrl: String
         get() = arguments?.getString(Constant.Args.VIDEO_URL) ?: ""
 
@@ -39,7 +40,7 @@ class VideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val player = ExoPlayerFactory.newSimpleInstance(context)
+        player = ExoPlayerFactory.newSimpleInstance(context)
         player.playWhenReady = true
 
         playerView?.player = player as Player
@@ -75,4 +76,9 @@ class VideoFragment : Fragment() {
     private fun String.isMp4(): Boolean = this.contains(".mp4",true)
 
     private fun String.isHls():Boolean = this.contains(".m3u8",true)
+
+    override fun onDestroy() {
+        player.release()
+        super.onDestroy()
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.videoexample.ext
 
-import android.provider.MediaStore
 import com.example.videoexample.ui.page1.VideoItem
 
 object SampleData {

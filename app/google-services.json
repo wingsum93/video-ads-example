@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "682702588336",
+    "firebase_url": "https://video-ads-sample.firebaseio.com",
+    "project_id": "video-ads-sample",
+    "storage_bucket": "video-ads-sample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682702588336:android:e56b3c9973acd5ac",
+        "android_client_info": {
+          "package_name": "com.example.videoexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682702588336-5g1sbtp0nqber9s2nfd319gpd21gplvt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRZvI-EhwxeFqUI6DMUVGUstMW_dUSZNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682702588336-5g1sbtp0nqber9s2nfd319gpd21gplvt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
