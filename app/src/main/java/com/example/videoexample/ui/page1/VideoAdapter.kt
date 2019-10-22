@@ -37,10 +37,13 @@ class VideoAdapter(val context: Context, val data: ArrayList<VideoItem>) :
             holder.lb_playing.visibility = View.GONE
         }
 //        holder.icon.loadImage(SampleData.VIDEO_1)
-        GlideApp.with(context)
-            .load(SampleData.VIDEO_1)
-            .thumbnail(0.2f)
-            .into(holder.icon)
+        item.thumbnail?.let {
+            GlideApp.with(context)
+                .load(it)
+                .thumbnail(0.2f)
+                .into(holder.icon)
+
+        }
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
